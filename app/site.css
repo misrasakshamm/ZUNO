@@ -1,0 +1,243 @@
+/* =====================================================================
+   ZUNO site layout (follows the SERIES design)
+
+   1rem = 10 design units. The design frame is ~1240px wide, so the page
+   scales with the browser width the same way the Figma frame does.
+   ===================================================================== */
+html { font-size: clamp(8px, 0.8065vw, 18px); }
+
+/* kept from the old stylesheet (used by the title page) */
+.chip { background: var(--red); padding: 3px 10px; border-radius: 4px; font-weight: 700; font-size: 12px; }
+.chip.dark { background: rgba(255,255,255,.14); }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.zwrap { width: 92.7%; margin-inline: auto; }
+
+/* ---------------------------------------------------------- navbar */
+.znav { position: fixed; inset: 0 0 auto 0; height: 7.4rem; z-index: 50; transition: background .25s; }
+.znav.solid { background: rgba(17,17,17,.97); }
+.znav-inner { width: 92.7%; height: 100%; margin-inline: auto; display: flex; align-items: center; }
+.zlogo { display: flex; align-items: center; flex-shrink: 0; color: #fff; }
+.zlogo .zuno-logo { width: 7.2rem; height: auto; }
+.znav-links { display: flex; align-items: center; gap: 2.6rem; margin-left: 2.8rem; font-size: 1.5rem; }
+.znav-links a { color: #8e8e8e; transition: color .2s; }
+.znav-links a:hover, .znav-links a.active { color: #fff; }
+
+.zsearch-wrap { position: relative; margin-left: auto; width: 32.9rem; }
+.zsearch {
+  height: 3.2rem; display: flex; align-items: center; gap: 1rem; padding: 0 1.3rem 0 1.4rem;
+  border: 1px solid rgba(255,255,255,.55); border-radius: 999px; background: rgba(0,0,0,.22);
+  transition: border-color .2s;
+}
+.zsearch:focus-within { border-color: #fff; }
+.zsearch svg { flex-shrink: 0; }
+.zsearch input { flex: 1; min-width: 0; background: none; border: 0; outline: 0; font-size: 1.25rem; font-weight: 600; color: #fff; }
+.zsearch input::placeholder { color: #fff; opacity: 1; }
+.zfilter { display: grid; place-items: center; color: #fff; }
+.zdrop {
+  position: absolute; top: calc(100% + .4rem); left: 0; right: 0; overflow: hidden;
+  border: 1px solid rgba(255,255,255,.5); border-radius: .6rem;
+  background: rgba(0,0,0,.45); backdrop-filter: blur(3px);
+}
+.zdrop button { display: flex; align-items: center; gap: .6rem; width: 100%; height: 2.35rem; padding: 0 1rem; font-size: 1.15rem; font-weight: 600; color: #fff; text-align: left; }
+.zdrop button + button { border-top: 1px solid rgba(255,255,255,.4); }
+.zdrop button:hover { background: rgba(255,255,255,.1); }
+.zavatar {
+  width: 3.5rem; height: 3.5rem; margin-left: .6rem; border-radius: 50%; flex-shrink: 0;
+  display: grid; place-items: center; color: #fff;
+  background: linear-gradient(135deg, #e50914, #6e0000); border: 2px solid rgba(255,255,255,.35);
+}
+.zmenu { display: none; font-size: 2.4rem; margin-left: 1rem; color: #fff; }
+
+/* ------------------------------------------------------------ hero */
+.zhero { position: relative; height: 72.2rem; overflow: hidden; background: #1a0e08; }
+.zhero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 68% 28%, rgba(255,150,40,.6), transparent 42%),
+    radial-gradient(ellipse at 82% 58%, rgba(190,60,20,.5), transparent 48%),
+    linear-gradient(120deg, #2a1608 0%, #4a2410 48%, #1a0d07 100%);
+}
+.zhero-img { position: absolute; inset: 0; background-size: cover; background-position: center top; }
+.zhero::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 20%, rgba(17,17,17,0) 58%, #111 100%),
+    linear-gradient(to right, rgba(0,0,0,.5), rgba(0,0,0,0) 55%);
+}
+.zhero-body { position: absolute; z-index: 2; left: 3.7%; top: 30.6rem; max-width: 60rem; }
+.zhero-label { font-size: 1.15rem; line-height: 1.2rem; color: #bdbdbd; }
+.zhero h1 { margin-top: .1rem; font-size: 3.9rem; line-height: 4.7rem; font-weight: 700; text-transform: uppercase; }
+.zhero-text { max-width: 41rem; margin-top: -.2rem; font-size: 1.2rem; line-height: 1.6rem; color: #e4e4e4; }
+.zhero-meta { display: flex; align-items: center; gap: .7rem; margin-top: 1.35rem; font-size: .95rem; color: #b8b8b8; }
+.zhero-tag {
+  display: inline-flex; align-items: center; justify-content: center; width: 7.5rem; height: 1.9rem;
+  margin-right: .3rem; border: 1px solid rgba(255,255,255,.6); border-radius: 999px; font-size: .85rem; color: #cfcfcf;
+}
+.zhero-btns { display: flex; gap: 1.5rem; margin-top: 1.9rem; }
+.zhero-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .7rem; height: 3.3rem;
+  border-radius: 999px; font-size: 1.3rem; font-weight: 500; transition: filter .2s;
+}
+.zhero-btn:hover { filter: brightness(1.18); }
+.zhero-btn.red { width: 10.9rem; background: #a80000; }
+.zhero-btn.ghost { width: 15.9rem; border: 1px solid rgba(255,255,255,.7); background: rgba(0,0,0,.15); }
+
+/* ------------------------------------------------------ poster rows */
+.zrows { padding-top: .6rem; }
+.zrow { margin-bottom: 3.2rem; }
+.zrow-label { font-size: 1.4rem; line-height: 2rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1rem; }
+.zrow-view { position: relative; }
+.zrow-track { display: flex; gap: 2.6rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.zrow-track::-webkit-scrollbar { display: none; }
+.zcard { flex: 0 0 calc((100% - 13rem) / 6); scroll-snap-align: start; display: block; }
+.zposter { position: relative; aspect-ratio: 3 / 4; border-radius: .7rem; overflow: hidden; background: #1c1c1c; transition: transform .25s; }
+.zcard:hover .zposter { transform: translateY(-.4rem); }
+.zposter-ph, .zposter-img { position: absolute; inset: 0; }
+.zposter-ph { display: flex; align-items: flex-end; padding: 1rem; font-size: 1.4rem; font-weight: 800; text-transform: uppercase; line-height: 1.15; color: rgba(255,255,255,.85); }
+.zposter-img { background-size: cover; background-position: center; }
+.zcap { margin-top: .7rem; font-size: 1rem; line-height: 1.4rem; text-align: center; color: #dcdcdc; }
+.zarrow {
+  position: absolute; z-index: 3; right: -2.9rem; top: calc(50% - 1.05rem); transform: translateY(-50%);
+  width: 5rem; height: 5rem; border-radius: 50%; display: grid; place-items: center; color: #fff;
+  border: 1px solid rgba(255,255,255,.55); background: rgba(40,40,40,.55); backdrop-filter: blur(2px);
+  transition: background .2s;
+}
+.zarrow:hover { background: rgba(80,80,80,.8); }
+
+.zcenter { display: flex; justify-content: center; margin-top: 1.85rem; }
+.zpill {
+  display: inline-flex; align-items: center; justify-content: center; width: 17.1rem; height: 4rem;
+  border-radius: 999px; background: #760000; font-size: 1.2rem; font-weight: 500; transition: filter .2s;
+}
+.zpill:hover { filter: brightness(1.25); }
+.zpill.caps { height: 3.8rem; text-transform: uppercase; }
+
+/* ------------------------------------------------- recently watched */
+.zrecent { margin-top: 5.75rem; }
+.zrecent .zrow-label { margin-bottom: 3rem; }
+.zrecent-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem 2.5rem; }
+.zep { background: #0a0a0a; border-radius: 1.1rem; padding: .5rem .5rem 1.7rem; }
+.zep-thumb {
+  position: relative; aspect-ratio: 258 / 133; border-radius: .8rem; overflow: hidden;
+  background: linear-gradient(160deg, hsl(var(--h) 45% 32%), hsl(var(--h) 40% 12%));
+}
+.zep-img { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.zep-bar { position: absolute; left: .8rem; right: .8rem; bottom: .7rem; height: 2px; background: rgba(255,255,255,.55); }
+.zep-bar i { position: absolute; left: 0; top: 0; bottom: 0; background: #d40000; }
+.zep-bar i::after { content: ""; position: absolute; right: -.3rem; top: 50%; width: .7rem; height: .7rem; border-radius: 50%; background: #d40000; transform: translateY(-50%); }
+.zep h4 { margin: .9rem .7rem 0; font-size: 1.15rem; line-height: 1.5rem; font-weight: 600; }
+.zep p { margin: .1rem .7rem 0; font-size: .75rem; line-height: 1rem; color: #d0d0d0; }
+.zmore { display: flex; justify-content: center; margin-top: 2.2rem; }
+
+/* ------------------------------------------------------------- faq */
+.zsec { margin-top: 9.8rem; }
+.zsec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem; }
+.zsec-head.plain { margin-bottom: 2.65rem; }
+.zsec-head h2 { font-size: 3.4rem; line-height: 4.1rem; font-weight: 500; }
+.zask {
+  display: inline-flex; align-items: center; justify-content: center; width: 16.3rem; height: 4.1rem;
+  border-radius: 999px; background: #760000; font-size: 1.5rem; font-weight: 600; transition: filter .2s;
+}
+.zask:hover { filter: brightness(1.25); }
+.zfaq { display: grid; gap: 1.1rem; }
+.zfaq-item { background: #272727; border-radius: 1.2rem; overflow: hidden; }
+.zfaq-head { display: flex; align-items: center; width: 100%; height: 7.3rem; text-align: left; }
+.zfaq-num { width: 10rem; height: 100%; flex-shrink: 0; display: grid; place-items: center; background: #760000; font-size: 2.8rem; font-weight: 500; }
+.zfaq-q { flex: 1; margin-left: 3.1rem; font-size: 1.7rem; font-weight: 600; }
+.zfaq-chev { display: grid; margin-right: 4.5rem; transition: transform .25s; }
+.zfaq-item.open .zfaq-chev { transform: rotate(180deg); }
+.zfaq-a { display: none; padding: 0 4.5rem 2.2rem 13.1rem; font-size: 1.4rem; line-height: 2.1rem; color: #bdbdbd; }
+.zfaq-item.open .zfaq-a { display: block; }
+
+/* ----------------------------------------------------------- plans */
+.zplans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.6rem; }
+.zplan { height: 29.5rem; display: flex; flex-direction: column; padding: 1.8rem 2.4rem; background: #272727; border-radius: 1.2rem; }
+.zplan h3 { font-size: 1.8rem; line-height: 2.2rem; font-weight: 500; }
+.zplan-mid { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.zplan li { display: flex; align-items: center; gap: .5rem; font-size: 1.13rem; line-height: 2.4rem; color: #666; }
+.zplan li::before { content: ""; flex-shrink: 0; width: .5rem; height: .5rem; border-radius: 50%; background: #666; }
+.zprice { font-size: 6.1rem; line-height: 1; font-weight: 700; color: #5e5e5e; }
+.zbuy {
+  display: flex; align-items: center; justify-content: center; height: 4.1rem; border-radius: .9rem;
+  background: #760000; font-size: 2rem; font-weight: 600; transition: filter .2s;
+}
+.zbuy:hover { filter: brightness(1.25); }
+
+/* ---------------------------------------------------- free trial banner */
+.zcta-sec { margin-top: 10rem; }
+.zcta { position: relative; height: 29.5rem; display: flex; align-items: center; padding-left: 6.8rem; overflow: hidden; border-radius: 1.2rem; background: #8a0000; }
+.zcta-art {
+  position: absolute; inset: 0; background-size: cover; background-position: center;
+  background-image:
+    linear-gradient(90deg, rgba(8,0,0,.9) 0%, rgba(25,0,0,.78) 36%, rgba(110,0,0,.15) 40%, rgba(110,0,0,0) 100%),
+    repeating-linear-gradient(100deg, #7a0000 0 8rem, #9a0000 8rem 14rem, #650000 14rem 17rem);
+}
+.zcta-text { position: relative; z-index: 2; }
+.zcta h3 { font-size: 3rem; line-height: 4.25rem; font-weight: 500; }
+.zcta h3 b { display: block; margin-top: .5rem; font-size: 3.6rem; font-weight: 500; }
+.zcta-btn {
+  display: inline-flex; align-items: center; justify-content: center; width: 15.6rem; height: 4.2rem; margin-top: 2.2rem;
+  border-radius: .8rem; background: #760000; font-size: 1.5rem; font-weight: 500; transition: filter .2s;
+}
+.zcta-btn:hover { filter: brightness(1.25); }
+.zcta-logo { position: absolute; z-index: 2; left: 72%; top: 50%; width: 16.8rem; height: auto; transform: translate(-50%, -50%); color: #fff; }
+
+/* ---------------------------------------------------------- footer */
+.zfoot { margin-top: 8.8rem; padding: 7.8rem 6% 7rem; background: #760000; border-radius: 1.6rem 1.6rem 0 0; }
+.zfoot-grid { display: grid; grid-template-columns: 34% 14.2% 23.8% 28%; align-items: start; }
+.zfoot .zuno-logo { width: 16.8rem; height: auto; margin-bottom: 2.3rem; color: #fff; }
+.zfoot-brand p { max-width: 28rem; font-size: 1.1rem; line-height: 1.52rem; color: #e3c3c3; }
+.zfoot-brand p + p { margin-top: 2.1rem; }
+.zfoot-brand p b { color: #fff; font-weight: 500; }
+.zfoot-col { padding-top: 4.5rem; }
+.zfoot h4 { margin-bottom: 1.6rem; font-size: 1.2rem; line-height: 1.4rem; font-weight: 500; text-transform: uppercase; }
+.zfoot h4.gap { margin-top: 3.6rem; }
+.zfoot li { font-size: 1.25rem; line-height: 2.03rem; }
+.zfoot li a:hover, .zfoot-icons a:hover { opacity: .75; }
+.zfoot-icons { display: flex; align-items: center; justify-content: center; gap: .8rem; }
+.zfoot-icons.left { justify-content: flex-start; margin-top: -.2rem; }
+.zfoot-icons a { color: #fff; display: grid; place-items: center; }
+.zfoot-icons a.dim { color: #d9a7a7; }
+.zfoot-col.follow { text-align: center; }
+.zfoot-col.follow h4 { margin-bottom: 1.8rem; }
+.zfoot .designed { margin-top: 1.3rem; font-size: 1.25rem; line-height: 1.6rem; }
+.zfoot .designed b { font-weight: 600; }
+
+/* --------------------------------------------------------- mobile */
+@media (max-width: 900px) {
+  html { font-size: 11px; }
+  .znav { height: 6.4rem; }
+  .znav-links { display: none; }
+  .znav-links.open {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 1.6rem; position: absolute;
+    top: 6.4rem; left: 0; right: 0; margin: 0; padding: 2rem 4%; background: #0a0a0a; font-size: 1.6rem;
+  }
+  .zsearch-wrap { display: none; }
+  .zavatar { margin-left: auto; }
+  .zmenu { display: block; }
+  .zhero { height: auto; min-height: 54rem; padding-bottom: 6rem; }
+  .zhero-body { position: relative; left: auto; top: auto; margin: 0 4%; padding-top: 20rem; }
+  .zhero h1 { font-size: 3rem; line-height: 3.6rem; }
+  .zhero-text { font-size: 1.4rem; line-height: 2rem; }
+  .zrow-track { gap: 1.6rem; }
+  .zcard { flex-basis: calc((100% - 3.2rem) / 3); }
+  .zarrow { right: .4rem; width: 4rem; height: 4rem; }
+  .zrecent-grid { grid-template-columns: repeat(2, 1fr); }
+  .zplans { grid-template-columns: 1fr; }
+  .zplan { height: auto; gap: 1.6rem; }
+  .zsec-head h2 { font-size: 2.4rem; line-height: 3rem; }
+  .zfaq-num { width: 6rem; font-size: 2rem; }
+  .zfaq-q { margin-left: 1.6rem; font-size: 1.4rem; }
+  .zfaq-chev { margin-right: 1.6rem; }
+  .zfaq-a { padding-left: 7.6rem; }
+  .zcta { height: auto; padding: 3rem 2.4rem; }
+  .zcta-logo { display: none; }
+  .zfoot-grid { grid-template-columns: 1fr; gap: 2.4rem; }
+  .zfoot-col { padding-top: 0; }
+  .zfoot-col.follow { text-align: left; }
+  .zfoot-icons { justify-content: flex-start; }
+}
+@media (max-width: 520px) {
+  .zcard { flex-basis: calc((100% - 1.6rem) / 2); }
+}
